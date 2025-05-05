@@ -1,0 +1,2 @@
+module VocabulariopalavrasHelper
+end

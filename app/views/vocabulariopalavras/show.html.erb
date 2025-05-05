@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @vocabulariopalavra %>
+
+<div>
+  <%= link_to "Edit this vocabulariopalavra", edit_vocabulariopalavra_path(@vocabulariopalavra) %> |
+  <%= link_to "Back to vocabulariopalavras", vocabulariopalavras_path %>
+
+  <%= button_to "Destroy this vocabulariopalavra", @vocabulariopalavra, method: :delete %>
+</div>

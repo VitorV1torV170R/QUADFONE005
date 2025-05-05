@@ -1,0 +1,2 @@
+class Atendimentopalavra < ApplicationRecord
+end

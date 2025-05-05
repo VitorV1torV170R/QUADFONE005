@@ -1,0 +1,42 @@
+<%= form_with(model: atendimento) do |form| %>
+  <% if atendimento.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(atendimento.errors.count, "error") %> prohibited this atendimento from being saved:</h2>
+
+      <ul>
+        <% atendimento.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :data, style: "display: block" %>
+    <%= form.datetime_field :data %>
+  </div>
+
+  <div>
+    <%= form.label :descricao, style: "display: block" %>
+    <%= form.textarea :descricao %>
+  </div>
+
+  <div>
+    <%= form.label :status, style: "display: block" %>
+    <%= form.text_field :status %>
+  </div>
+
+  <div>
+    <%= form.label :paciente_id, style: "display: block" %>
+    <%= form.text_field :paciente_id %>
+  </div>
+
+  <div>
+    <%= form.label :profissional_id, style: "display: block" %>
+    <%= form.text_field :profissional_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

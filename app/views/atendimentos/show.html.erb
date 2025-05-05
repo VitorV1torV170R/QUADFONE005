@@ -1,0 +1,69 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @atendimento %>
+
+<div>
+  <%= link_to "Edit this atendimento", edit_atendimento_path(@atendimento) %> |
+  <%= link_to "Back to atendimentos", atendimentos_path %>
+
+  <%= button_to "Destroy this atendimento", @atendimento, method: :delete %>
+  <br>
+
+  <h2>Gerenciar Palavras do Atendimento</h2>
+
+    <p>Clique no botão abaixo para importar todas as palavras do vocabulário para este atendimento.</p>
+    
+    <%# Cria um formulário que enviará uma requisição POST para a nova rota %>
+    <%= form_with url: importar_palavras_vocabulario_atendimento_path(@atendimento), method: :post do %>
+      <%= submit_tag "Importar Palavras do Vocabulário" %>
+    <% end %>
+  
+  <br>
+
+  <!-- Botão com atributo data-descricao -->
+<button onclick="mostrarMensagem(this)" data-descricao="<%= @atendimento.descricao %>">Clique aqui</button>
+
+
+<!-- Área onde a mensagem será exibida -->
+<p id="mensagem"></p>
+
+<script>
+  function mostrarMensagem(botao) {
+    const descricao = botao.getAttribute("data-descricao");
+    document.getElementById("mensagem").innerText = descricao;
+  }
+</script>
+
+<br>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Palavra</th>
+      <th>ID do Vocabulário</th>
+      <%# Adicione <th> para outras colunas se houver %>
+      <th>Criado Em</th>
+      <th>Atualizado Em</th>
+      <th colspan="3"></th> <%# Colunas para Show, Edit, Destroy %>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @vocabulariopalavras.each do |vocabulariopalavra| %>
+      <tr>
+        <td><%= vocabulariopalavra.id %></td>
+        <td><%= vocabulariopalavra.palavra %></td>
+        <td><%= vocabulariopalavra.vocabulario_id %></td>
+        <%# Adicione <td> para exibir os dados de outras colunas %>
+        <td><%= vocabulariopalavra.created_at %></td>
+        <td><%= vocabulariopalavra.updated_at %></td>
+        <td><%= link_to "Mostrar", vocabulariopalavra %></td>
+        <td><%= link_to "Editar", edit_vocabulariopalavra_path(vocabulariopalavra) %></td>
+        <td><%= link_to "Excluir", vocabulariopalavra, method: :delete, data: { confirm: "Tem certeza?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+</div>
