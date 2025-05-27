@@ -13,6 +13,8 @@ bundle exec rails assets:clean
 # If you have a paid instance type, we recommend moving
 # database migrations like this one from the build command
 # to the pre-deploy command:
-bin/rails db:migrate
+# bin/rails db:migrate
+bundle exec rails db:migrate
 
-bin/rails db:seed
+# bin/rails db:seed
+bundle exec rails db:seed
