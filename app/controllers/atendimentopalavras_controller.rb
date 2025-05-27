@@ -2,8 +2,16 @@ class AtendimentopalavrasController < ApplicationController
   before_action :set_atendimentopalavra, only: %i[ show edit update destroy ]
 
   # GET /atendimentopalavras or /atendimentopalavras.json
+  # def index
+  #   @atendimentopalavras = Atendimentopalavra.all
+  # end
+
   def index
-    @atendimentopalavras = Atendimentopalavra.all
+    if params[:atendimento_id]
+      @atendimentopalavras = Atendimentopalavra.where(atendimento_id: params[:atendimento_id])
+    else
+      @atendimentopalavras = Atendimentopalavra.all
+    end
   end
 
   # GET /atendimentopalavras/1 or /atendimentopalavras/1.json
@@ -65,6 +73,6 @@ class AtendimentopalavrasController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def atendimentopalavra_params
-      params.expect(atendimentopalavra: [ :palavra, :transcricao ])
+      params.expect(atendimentopalavra: [ :palavra, :transcricao, :atendimento_id ])
     end
 end

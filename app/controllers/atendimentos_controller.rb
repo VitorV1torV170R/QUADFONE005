@@ -15,6 +15,16 @@ class AtendimentosController < ApplicationController
     @vocabulariopalavras = Vocabulariopalavra.all
     # *****************************************************
 
+    @atendimento = Atendimento.find(params[:id])
+
+    @atendimentopalavras = Atendimentopalavra.where(atendimento_id: @atendimento.id)
+
+    if @atendimentopalavras.count == 0
+      # Chame o método que importa as palavras do vocabulário
+      adicionar_palavras
+      # Recarregue as palavras após importar
+      @atendimentopalavras = Atendimentopalavra.where(atendimento_id: @atendimento.id)
+    end
   end
 
   # GET /atendimentos/new
@@ -126,6 +136,22 @@ class AtendimentosController < ApplicationController
     redirect_to (@atendimento || atendimentos_url), alert: "Ocorreu um erro ao importar as palavras do vocabulário."
   end
 
+  def adicionar_palavras
+    #@atendimento = Atendimento.find(params[:id])
+    #vocabulariopalavras = Vocabulariopalavra.all
+    # Filtra as palavras do vocabulário que possuem o mesmo vocabulario_id do atendimento atual
+    vocabulariopalavras = Vocabulariopalavra.where(vocabulario_id: @atendimento.vocabulario_id)
+  
+    vocabulariopalavras.each do |vocabulario|
+      Atendimentopalavra.create(
+        palavra: vocabulario.palavra,
+        atendimento_id: @atendimento.id
+      )
+    end
+  
+    redirect_to @atendimento, notice: "Palavras adicionadas com sucesso!"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_atendimento
@@ -134,6 +160,6 @@ class AtendimentosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def atendimento_params
-      params.expect(atendimento: [ :data, :descricao, :status, :paciente_id, :profissional_id ])
+      params.expect(atendimento: [ :data, :descricao, :status, :paciente_id, :profissional_id, :vocabulario_id, :audio ])
     end  
 end

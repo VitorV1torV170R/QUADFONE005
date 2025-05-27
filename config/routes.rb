@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+  resource :session
+  resources :passwords, param: :token
+  resources :atendimentopalavras
   resources :vocabulariopalavras
   resources :vocabularios
-  resources :atendimentopalavras
   resources :atendimentos
   resources :empresas
   resources :profissionals
@@ -13,9 +15,6 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
   
-  #ROTA PARA O CONTROLADOR HELLO
-  get 'hello_world', to: 'hello#world'
-
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
@@ -29,6 +28,11 @@ Rails.application.routes.draw do
     member do
       post 'importar_palavras_vocabulario'
     end
+
+    member do
+      post :adicionar_palavras
+    end
+
   end
 
   resources :vocabulariopalavras # Mantenha esta rota se você a tiver

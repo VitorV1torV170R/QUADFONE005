@@ -4,13 +4,41 @@
 
 <h1>Atendimentopalavras</h1>
 
-<div id="atendimentopalavras">
-  <% @atendimentopalavras.each do |atendimentopalavra| %>
-    <%= render atendimentopalavra %>
-    <p>
-      <%= link_to "Show this atendimentopalavra", atendimentopalavra %>
-    </p>
-  <% end %>
-</div>
+<table>
+  <thead>
+    <tr>
+      <th>Palavra</th>
+      <th>Transcricao</th>
+      <th>Atendimento</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @atendimentopalavras.each do |atendimentopalavra| %>
+      <tr>
+        <td><%= atendimentopalavra.palavra %></td>
+        <td><%= atendimentopalavra.transcricao %></td>
+        <td><%= atendimentopalavra.atendimento_id %></td>
+        <td>
+          <%= link_to "Mostrar", atendimentopalavra_path(atendimentopalavra), class: "btn btn-primary" %>
+          <%= link_to "Editar", edit_atendimentopalavra_path(atendimentopalavra), class: "btn btn-secondary" %>
+          <%= link_to "Deletar", atendimentopalavra_path(atendimentopalavra), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-<%= link_to "New atendimentopalavra", new_atendimentopalavra_path %>
+
+<table>
+  <thead>
+    <tr>
+      <th><%= link_to "Novo atendimento palavra", new_atendimentopalavra_path %></th>
+      <th><%= link_to "Voltar para Atendimentos", atendimentos_path, class: "btn btn-secondary" %></th>
+    </tr>
+  </thead>
+</table>
+
+
+
+
+

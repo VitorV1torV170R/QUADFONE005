@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
+
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.classless.min.css"
+    />
+
     <title><%= content_for(:title) || "Quadfone005" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -23,6 +29,7 @@
   </head>
 
   <body>
-    <%= yield %>
+    <main><%= yield %></main>
   </body>
+
 </html>

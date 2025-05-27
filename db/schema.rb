@@ -10,12 +10,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_28_210134) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_16_184904) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_catalog.plpgsql"
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.string "service_name", null: false
+    t.bigint "byte_size", null: false
+    t.string "checksum"
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
   create_table "atendimentopalavras", force: :cascade do |t|
     t.string "palavra"
     t.string "transcricao"
+    t.integer "atendimento_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["atendimento_id"], name: "index_atendimentopalavras_on_atendimento_id"
   end
 
   create_table "atendimentos", force: :cascade do |t|
@@ -26,6 +59,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_28_210134) do
     t.integer "profissional_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "vocabulario_id"
     t.index ["paciente_id"], name: "index_atendimentos_on_paciente_id"
     t.index ["profissional_id"], name: "index_atendimentos_on_profissional_id"
   end
@@ -68,6 +102,23 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_28_210134) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "sessions", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "ip_address"
+    t.string "user_agent"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_sessions_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email_address", null: false
+    t.string "password_digest", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email_address"], name: "index_users_on_email_address", unique: true
+  end
+
   create_table "vocabulariopalavras", force: :cascade do |t|
     t.string "palavra"
     t.integer "vocabulario_id", null: false
@@ -82,9 +133,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_28_210134) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "atendimentopalavras", "atendimentos"
   add_foreign_key "atendimentos", "pacientes"
   add_foreign_key "atendimentos", "profissionals"
   add_foreign_key "empresas", "profissionals"
   add_foreign_key "pacientes", "clientes"
+  add_foreign_key "sessions", "users"
   add_foreign_key "vocabulariopalavras", "vocabularios"
 end

@@ -37,6 +37,17 @@
   </div>
 
   <div>
+  <%= form.label :vocabulario_id, style: "display: block" %>
+  <%= form.text_field :vocabulario_id %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
+
+  <div class="field">
+    <%= form.label :audio, "Áudio (mp3)" %>
+    <%= form.file_field :audio, accept: 'audio/mp3,audio/mpeg' %>
+  </div>
+
 <% end %>

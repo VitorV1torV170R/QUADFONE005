@@ -17,7 +17,7 @@ class AtendimentopalavrasControllerTest < ActionDispatch::IntegrationTest
 
   test "should create atendimentopalavra" do
     assert_difference("Atendimentopalavra.count") do
-      post atendimentopalavras_url, params: { atendimentopalavra: { palavra: @atendimentopalavra.palavra, transcricao: @atendimentopalavra.transcricao } }
+      post atendimentopalavras_url, params: { atendimentopalavra: { atendimento_id: @atendimentopalavra.atendimento_id, palavra: @atendimentopalavra.palavra, transcricao: @atendimentopalavra.transcricao } }
     end
 
     assert_redirected_to atendimentopalavra_url(Atendimentopalavra.last)
@@ -34,7 +34,7 @@ class AtendimentopalavrasControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update atendimentopalavra" do
-    patch atendimentopalavra_url(@atendimentopalavra), params: { atendimentopalavra: { palavra: @atendimentopalavra.palavra, transcricao: @atendimentopalavra.transcricao } }
+    patch atendimentopalavra_url(@atendimentopalavra), params: { atendimentopalavra: { atendimento_id: @atendimentopalavra.atendimento_id, palavra: @atendimentopalavra.palavra, transcricao: @atendimentopalavra.transcricao } }
     assert_redirected_to atendimentopalavra_url(@atendimentopalavra)
   end
 

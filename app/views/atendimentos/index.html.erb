@@ -4,15 +4,36 @@
 
 <h1>Atendimentos</h1>
 
-<div id="atendimentos">
-  <% @atendimentos.each do |atendimento| %>
-    <%= render atendimento %>
-    <p>
-      <%= link_to "Show this atendimento", atendimento %>
-    </p>
-
-  <% end %>
-</div>
+<table>
+  <thead>
+    <tr>
+      <th>Data</th>
+      <th>descricao</th>
+      <th>status</th>
+      <th>Paciente</th>
+      <th>Profissional</th>
+      <th>Vocabulário</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @atendimentos.each do |atendimento| %>
+      <tr>
+        <td><%= atendimento.data.strftime("%d/%m/%Y") %></td>
+        <td><%= atendimento.descricao %></td>
+        <td><%= atendimento.status %></td>
+        <td><%= atendimento.paciente_id %></td>
+        <td><%= atendimento.profissional_id %></td>
+        <td><%= atendimento.vocabulario_id %></td>
+        <td>
+          <%= link_to "Ver Palavras", atendimentopalavras_path(atendimento_id: atendimento.id), class: "btn btn-info" %>
+          <%= link_to "Show", atendimento_path(atendimento), class: "btn btn-primary" %>
+          <%= link_to "Edit", edit_atendimento_path(atendimento), class: "btn btn-secondary" %>
+          <%= link_to "Delete", atendimento_path(atendimento), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <%= link_to "New atendimento", new_atendimento_path %>
 

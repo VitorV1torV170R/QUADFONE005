@@ -14,6 +14,7 @@ class AtendimentopalavrasTest < ApplicationSystemTestCase
     visit atendimentopalavras_url
     click_on "New atendimentopalavra"
 
+    fill_in "Atendimento", with: @atendimentopalavra.atendimento_id
     fill_in "Palavra", with: @atendimentopalavra.palavra
     fill_in "Transcricao", with: @atendimentopalavra.transcricao
     click_on "Create Atendimentopalavra"
@@ -26,6 +27,7 @@ class AtendimentopalavrasTest < ApplicationSystemTestCase
     visit atendimentopalavra_url(@atendimentopalavra)
     click_on "Edit this atendimentopalavra", match: :first
 
+    fill_in "Atendimento", with: @atendimentopalavra.atendimento_id
     fill_in "Palavra", with: @atendimentopalavra.palavra
     fill_in "Transcricao", with: @atendimentopalavra.transcricao
     click_on "Update Atendimentopalavra"

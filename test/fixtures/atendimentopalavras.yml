@@ -3,7 +3,9 @@
 one:
   palavra: MyString
   transcricao: MyString
+  atendimento: one
 
 two:
   palavra: MyString
   transcricao: MyString
+  atendimento: two
