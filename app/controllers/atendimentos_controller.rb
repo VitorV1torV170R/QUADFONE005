@@ -160,6 +160,6 @@ class AtendimentosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def atendimento_params
-      params.expect(atendimento: [ :data, :descricao, :status, :paciente_id, :profissional_id, :vocabulario_id, :audio ])
+      params.require(:atendimento).permit(:data, :descricao, :status, :paciente_id, :profissional_id, :vocabulario_id, :audio, :imagem)
     end  
 end

@@ -6,12 +6,12 @@
 
   <br>
 
-  <%= link_to "Edit this atendimento", edit_atendimento_path(@atendimento) %> |
-  <%= link_to "Back to atendimentos", atendimentos_path %>
+  <%= link_to "Editar o atendimento", edit_atendimento_path(@atendimento) %> |
+  <%= link_to "Voltar atendimentos", atendimentos_path %>
 
   <br>
 
-  <%= button_to "Destroy this atendimento", @atendimento, method: :delete %>
+  <%= button_to "Deletar atendimento", @atendimento, method: :delete %>
   
   <br>
 
@@ -33,5 +33,18 @@
     Seu navegador não suporta o elemento de áudio.
   </audio>
 <% end %>
+
+<br>
+
+<% if @atendimento.imagem.attached? %>
+  <p>
+    <strong>Imagem:</strong><br>
+    <%= image_tag url_for(@atendimento.imagem), style: "max-width: 300px;" %>
+  </p>
+<% end %>
+
+<br>
+
+
 
 </div>

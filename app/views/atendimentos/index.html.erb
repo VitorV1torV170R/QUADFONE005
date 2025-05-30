@@ -26,15 +26,15 @@
         <td><%= atendimento.vocabulario_id %></td>
         <td>
           <%= link_to "Ver Palavras", atendimentopalavras_path(atendimento_id: atendimento.id), class: "btn btn-info" %>
-          <%= link_to "Show", atendimento_path(atendimento), class: "btn btn-primary" %>
-          <%= link_to "Edit", edit_atendimento_path(atendimento), class: "btn btn-secondary" %>
-          <%= link_to "Delete", atendimento_path(atendimento), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+          <%= link_to "Mostrar", atendimento_path(atendimento), class: "btn btn-primary" %>
+          <%= link_to "Editar", edit_atendimento_path(atendimento), class: "btn btn-secondary" %>
+          <%= link_to "Deletar", atendimento_path(atendimento), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to "New atendimento", new_atendimento_path %>
+<%= link_to "Novo atendimento", new_atendimento_path %>
 
 
