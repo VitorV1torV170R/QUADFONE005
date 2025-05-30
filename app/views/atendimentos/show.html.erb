@@ -36,10 +36,10 @@
 
 <br>
 
-<% if @atendimento.imagem.attached? %>
+<% if @atendimento.image.attached? %>
   <p>
-    <strong>Imagem:</strong><br>
-    <%= image_tag url_for(@atendimento.imagem), style: "max-width: 300px;" %>
+    <strong>Image:</strong><br>
+    <%= image_tag url_for(@atendimento.image), style: "max-width: 300px;" %>
   </p>
 <% end %>
 

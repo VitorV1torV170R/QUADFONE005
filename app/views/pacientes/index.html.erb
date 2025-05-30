@@ -8,9 +8,9 @@
   <% @pacientes.each do |paciente| %>
     <%= render paciente %>
     <p>
-      <%= link_to "Show this paciente", paciente %>
+      <%= link_to "Mostrar paciente", paciente %>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New paciente", new_paciente_path %>
+<%= link_to "Novo Paciente", new_paciente_path %>
