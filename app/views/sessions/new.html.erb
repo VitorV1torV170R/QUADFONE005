@@ -1,11 +1,19 @@
+<% content_for :title, "Home Quadro Fonemico" %>
+
+<h1>Quadro Fonêmico</h1>
+
 <%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
 <%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
 
 <%= form_with url: session_path do |form| %>
-  <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address] %><br>
-  <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72 %><br>
-  <%= form.submit "Sign in" %>
+  <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Digite seu endereço de e-mail", value: params[:email_address] %><br>
+  <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Digite sua senha", maxlength: 72 %><br>
+  <%= form.submit "Entrar" %>
 <% end %>
 <br>
 
-<%= link_to "Forgot password?", new_password_path %>
+<%= link_to "Esqueceu a sua senha?", new_password_path %>
+
+<br>
+
+<%= link_to "Criar nova conta", new_user_path %>

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :profissionals
   resources :clientes
   resources :pacientes
+  resources :user
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -38,5 +39,7 @@ Rails.application.routes.draw do
   resources :vocabulariopalavras # Mantenha esta rota se você a tiver
 
   # ... suas outras rotas ...
+
+  root "atendimentos#index"
 
 end

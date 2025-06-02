@@ -18,4 +18,12 @@ class SessionsController < ApplicationController
     terminate_session
     redirect_to new_session_path
   end
+
+  private
+
+  def after_authentication_url
+    root_path # ou atendimentos_path, dashboard_path, etc.
+  end
 end
+
+
