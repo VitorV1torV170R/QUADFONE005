@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "home/index"
   resource :session
   resources :passwords, param: :token
   resources :atendimentopalavras
@@ -40,6 +41,7 @@ Rails.application.routes.draw do
 
   # ... suas outras rotas ...
 
-  root "atendimentos#index"
+  #Rota definida para a pagina inicial do aplicativo
+  root "home#index"
 
 end

@@ -1,0 +1,49 @@
+<!-- filepath: c:\DEV\quadfone005\app\views\home\index.html.erb -->
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      background-image: url('<%= asset_path("ImagemQuadFoneTest.jpg") %>');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      min-height: 100vh;
+    }
+    .conteudo-home {
+      background: rgba(255,255,255,0.85);
+      max-width: 600px;
+      margin: 80px auto;
+      padding: 40px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 0 16px #aaa;
+    }
+    .btn-home {
+      margin: 10px;
+      padding: 12px 32px;
+      font-size: 1.1em;
+      border-radius: 6px;
+      border: none;
+      background: #007bff;
+      color: #fff;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s;
+    }
+    .btn-home:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="conteudo-home">
+    <h1>Bem-vindo ao Quadro Fonêmico</h1>
+    <p>
+      Este sistema auxilia profissionais da área da fonoaudiologia no gerenciamento de atendimentos, vocabulários e acompanhamento de pacientes.
+    </p>
+    <%= link_to "Empresas", empresas_path, class: "btn-home" %>
+    <%= link_to "Profissionais", profissionals_path, class: "btn-home" %>
+  </div>
+</body>
+</html>
