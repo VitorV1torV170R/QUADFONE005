@@ -57,6 +57,24 @@ class ProfissionalsController < ApplicationController
     end
   end
 
+  #Controlador para exibir os atendimentos do profissional logado
+  def atendimentos
+    @profissional = Profissional.find(params[:id])
+    @atendimentos = Atendimento.where(profissional_id: @profissional.id)
+  end
+
+  #Controlador para exibir os pacientes do profissional logado
+  def pacientes
+    @profissional = Profissional.find(params[:id])
+    @pacientes = Paciente.joins(:atendimentos).where(atendimentos: { profissional_id: @profissional.id }).distinct
+  end
+
+  #Controlador para exibir os clientes do profissional logado
+  def clientes
+    @profissional = Profissional.find(params[:id])
+    @clientes = Cliente.where(profissional_id: @profissional.id)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_profissional
@@ -67,4 +85,5 @@ class ProfissionalsController < ApplicationController
     def profissional_params
       params.expect(profissional: [ :nome, :endereço, :telefone, :email ])
     end
+
 end

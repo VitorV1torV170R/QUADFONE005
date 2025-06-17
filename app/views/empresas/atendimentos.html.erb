@@ -1,0 +1,16 @@
+<h1>Atendimentos da Empresa: <%= @empresa.nome %></h1>
+
+<%= link_to "Novo Atendimento", new_atendimento_path, class: "btn btn-primary" %>
+
+<ul>
+  <% @atendimentos.each do |atendimento| %>
+    <li>
+      <strong>Paciente:</strong> <%= atendimento.paciente.nome if atendimento.paciente %> |
+      <strong>Descrição:</strong> <%= atendimento.descricao %> |
+      <strong>Data:</strong> <%= atendimento.data.strftime("%d/%m/%Y") if atendimento.data %>
+      <%= link_to "Mostrar Atendimento", atendimento_path(atendimento) %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to "Voltar", empresa_path(@empresa), class: "btn btn-secondary" %>

@@ -1,0 +1,112 @@
+<h1>Editor de Gráficos</h1>
+<canvas id="meuCanvas" width="800" height="600" style="border:1px solid #ccc; background: #fff;"></canvas>
+<br>
+<button onclick="adicionarCirculo()">Adicionar Círculo</button>
+<button onclick="adicionarLinha()">Adicionar Linha</button>
+<button onclick="removerSelecionado()">Remover Selecionado</button>
+
+<script>
+let canvas = document.getElementById('meuCanvas');
+let ctx = canvas.getContext('2d');
+let objetos = [];
+let selecionado = null;
+let arrastando = false;
+let offsetX, offsetY;
+
+// Funções para adicionar objetos
+function adicionarCirculo() {
+  objetos.push({ tipo: 'circulo', x: 100, y: 100, r: 30 });
+  desenhar();
+}
+function adicionarLinha() {
+  objetos.push({ tipo: 'linha', x1: 200, y1: 200, x2: 300, y2: 300 });
+  desenhar();
+}
+function removerSelecionado() {
+  if (selecionado !== null) {
+    objetos.splice(selecionado, 1);
+    selecionado = null;
+    desenhar();
+  }
+}
+
+// Função para desenhar todos os objetos
+function desenhar() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  objetos.forEach((obj, i) => {
+    ctx.save();
+    if (i === selecionado) {
+      ctx.shadowColor = 'red';
+      ctx.shadowBlur = 10;
+    }
+    if (obj.tipo === 'circulo') {
+      ctx.beginPath();
+      ctx.arc(obj.x, obj.y, obj.r, 0, 2 * Math.PI);
+      ctx.fillStyle = "#88f";
+      ctx.fill();
+      ctx.stroke();
+    } else if (obj.tipo === 'linha') {
+      ctx.beginPath();
+      ctx.moveTo(obj.x1, obj.y1);
+      ctx.lineTo(obj.x2, obj.y2);
+      ctx.strokeStyle = "#080";
+      ctx.lineWidth = 3;
+      ctx.stroke();
+    }
+    ctx.restore();
+  });
+}
+
+// Funções para seleção e arrasto
+canvas.onmousedown = function(e) {
+  let mx = e.offsetX, my = e.offsetY;
+  selecionado = null;
+  objetos.forEach((obj, i) => {
+    if (obj.tipo === 'circulo') {
+      let dx = mx - obj.x, dy = my - obj.y;
+      if (Math.sqrt(dx*dx + dy*dy) < obj.r) {
+        selecionado = i;
+        arrastando = true;
+        offsetX = dx;
+        offsetY = dy;
+      }
+    } else if (obj.tipo === 'linha') {
+      // Seleção simples: clique próximo ao ponto inicial
+      if (Math.abs(mx - obj.x1) < 10 && Math.abs(my - obj.y1) < 10) {
+        selecionado = i;
+        arrastando = true;
+        offsetX = mx - obj.x1;
+        offsetY = my - obj.y1;
+      }
+    }
+  });
+  desenhar();
+};
+
+canvas.onmousemove = function(e) {
+  if (arrastando && selecionado !== null) {
+    let obj = objetos[selecionado];
+    let mx = e.offsetX, my = e.offsetY;
+    if (obj.tipo === 'circulo') {
+      obj.x = mx - offsetX;
+      obj.y = my - offsetY;
+    } else if (obj.tipo === 'linha') {
+      let dx = mx - offsetX - obj.x1;
+      let dy = my - offsetY - obj.y1;
+      obj.x1 += dx;
+      obj.y1 += dy;
+      obj.x2 += dx;
+      obj.y2 += dy;
+      offsetX = mx - obj.x1;
+      offsetY = my - obj.y1;
+    }
+    desenhar();
+  }
+};
+
+canvas.onmouseup = function() {
+  arrastando = false;
+};
+
+desenhar();
+</script>

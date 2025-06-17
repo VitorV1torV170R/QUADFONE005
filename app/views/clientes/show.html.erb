@@ -2,6 +2,15 @@
 
 <%= render @cliente %>
 
+<p>
+  <strong>Pacientes deste cliente:</strong>
+  <ul>
+    <% @cliente.pacientes.each do |paciente| %>
+      <li><%= paciente.nome %></li>
+    <% end %>
+  </ul>
+</p>
+
 <div>
   <%= link_to "Editar Cliente", edit_cliente_path(@cliente) %> |
   <%= link_to "Voltar para Clientes", clientes_path %>
@@ -11,8 +20,7 @@
 
 <br>
 
-<%= link_to "Pacientes", pacientes_path, class: "btn btn-secondary" %>
+<%= link_to "Atendimentos", atendimentos_path, class: "btn btn-secondary" %>
 
 <br>
 
-<%= link_to "Atendimentos", atendimentos_path, class: "btn btn-secondary" %>

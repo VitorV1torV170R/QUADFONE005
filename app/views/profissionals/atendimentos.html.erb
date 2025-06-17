@@ -1,0 +1,14 @@
+<h1>Atendimentos do Profissional: <%= @profissional.nome %></h1>
+
+<ul>
+  <% @atendimentos.each do |atendimento| %>
+    <li>
+      <strong>Paciente:</strong> <%= atendimento.paciente.nome %> |
+      <strong>Descrição:</strong> <%= atendimento.descricao %> |
+      <strong>Data:</strong> <%= atendimento.data.strftime("%d/%m/%Y") if atendimento.data %>
+      <%= link_to "Editar o Atendimento", edit_atendimento_path(atendimento), class: "btn btn-primary btn-sm" %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to "Voltar", profissional_path(@profissional), class: "btn btn-secondary" %>

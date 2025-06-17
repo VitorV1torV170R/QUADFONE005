@@ -1,0 +1,15 @@
+<h1>Clientes da Empresa: <%= @empresa.nome %></h1>
+
+<%= link_to "Novo Cliente", new_cliente_path, class: "btn btn-primary" %>
+
+<ul>
+  <% @clientes.each do |cliente| %>
+    <li>
+      <%= cliente.nome %>
+      <%= link_to "Mostrar Cliente", cliente_path(cliente) %> |
+      <%= link_to "Editar Cliente", edit_cliente_path(cliente) %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to "Voltar", empresa_path(@empresa), class: "btn btn-secondary" %>

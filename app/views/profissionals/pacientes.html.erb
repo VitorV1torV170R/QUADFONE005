@@ -1,0 +1,13 @@
+<h1>Pacientes atendidos por <%= @profissional.nome %></h1>
+
+<ul>
+  <% @pacientes.each do |paciente| %>
+    <li>
+      <%= paciente.nome %>
+      <%= link_to "Mostrar Paciente", paciente_path(paciente) %> |
+      <%= link_to "Editar Paciente", edit_paciente_path(paciente) %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to "Voltar", profissional_path(@profissional), class: "btn btn-secondary" %>

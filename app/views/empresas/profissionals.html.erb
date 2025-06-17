@@ -1,0 +1,15 @@
+<h1>Profissionais da Empresa: <%= @empresa.nome %></h1>
+
+<%= link_to "Novo Profissional", new_profissional_path(empresa_id: @empresa.id), class: "btn btn-primary" %>
+
+<ul>
+  <% @profissionals.each do |profissional| %>
+    <li>
+      <%= profissional.nome %>
+      <%= link_to "Mostrar Profissional", profissional_path(profissional) %> |
+      <%= link_to "Editar Profissional", edit_profissional_path(profissional) %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to "Voltar", empresa_path(@empresa), class: "btn btn-secondary" %>

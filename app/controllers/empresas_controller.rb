@@ -57,6 +57,34 @@ class EmpresasController < ApplicationController
     end
   end
 
+  #Controlador para exibir os atendimentos ligados a empresa logada
+  def atendimentos
+    @empresa = Empresa.find(params[:id])
+    # Se Atendimento tem empresa_id direto:
+    # @atendimentos = Atendimento.where(empresa_id: @empresa.id)
+
+    # Se Atendimento pertence a um cliente e cliente pertence à empresa:
+    @atendimentos = Atendimento.joins(:cliente).where(clientes: { empresa_id: @empresa.id }).distinct
+  end
+
+  #Controlador para exibir os profissionais ligados a empresa logada
+  def profissionals
+    @empresa = Empresa.find(params[:id])
+    @profissionals = Profissional.where(empresa_id: @empresa.id)
+  end
+
+  #Controlador para exibir os pacientes ligados a empresa logada
+  def pacientes
+    @empresa = Empresa.find(params[:id])
+    @pacientes = Paciente.joins(:cliente).where(clientes: { empresa_id: @empresa.id }).distinct
+  end  
+
+  #Controlador para exibir os clientes ligados a empresa logada
+  def clientes
+    @empresa = Empresa.find(params[:id])
+    @clientes = Cliente.where(empresa_id: @empresa.id)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_empresa
@@ -65,6 +93,6 @@ class EmpresasController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def empresa_params
-      params.expect(empresa: [ :nome, :cnpj, :endereco, :telefone, :email, :profissional_id ])
+      params.expect(empresa: [ :nome, :cnpj, :endereco, :telefone, :email ])
     end
 end

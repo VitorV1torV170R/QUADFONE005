@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_16_184904) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_17_002143) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -60,6 +60,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_16_184904) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "vocabulario_id"
+    t.integer "cliente_id"
     t.index ["paciente_id"], name: "index_atendimentos_on_paciente_id"
     t.index ["profissional_id"], name: "index_atendimentos_on_profissional_id"
   end
@@ -70,6 +71,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_16_184904) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "profissional_id"
+    t.integer "empresa_id"
   end
 
   create_table "empresas", force: :cascade do |t|
@@ -90,6 +93,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_16_184904) do
     t.integer "cliente_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "empresa_id"
     t.index ["cliente_id"], name: "index_pacientes_on_cliente_id"
   end
 
@@ -100,6 +104,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_16_184904) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "empresa_id"
   end
 
   create_table "sessions", force: :cascade do |t|

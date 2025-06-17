@@ -1,0 +1,15 @@
+<h1>Pacientes da Empresa: <%= @empresa.nome %></h1>
+
+<%= link_to "Novo Paciente", new_paciente_path, class: "btn btn-primary" %>
+
+<ul>
+  <% @pacientes.each do |paciente| %>
+    <li>
+      <%= paciente.nome %>
+      <%= link_to "Mostrar Paciente", paciente_path(paciente) %> |
+      <%= link_to "Editar Paciente", edit_paciente_path(paciente) %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to "Voltar", empresa_path(@empresa), class: "btn btn-secondary" %>

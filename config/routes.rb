@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "graficos/index"
   get "home/index"
   resource :session
   resources :passwords, param: :token
@@ -6,7 +7,7 @@ Rails.application.routes.draw do
   resources :vocabulariopalavras
   resources :vocabularios
   resources :atendimentos
-  resources :empresas
+  #resources :empresas
   resources :profissionals
   resources :clientes
   resources :pacientes
@@ -37,11 +38,32 @@ Rails.application.routes.draw do
 
   end
 
+  #Rota para exibir infos ligados a empresa
+  resources :empresas do
+    member do
+      get :profissionals
+      get :atendimentos
+      get :pacientes
+      get :clientes
+    end
+  end
+
+  #Rota para exibir infos ligados ao profissional 
+  resources :profissionals do
+    member do
+      get :atendimentos
+      get :pacientes
+      get :clientes
+    end
+  end
+
   resources :vocabulariopalavras # Mantenha esta rota se você a tiver
 
   # ... suas outras rotas ...
 
   #Rota definida para a pagina inicial do aplicativo
   root "home#index"
+
+  get "graficos", to: "graficos#index"
 
 end
