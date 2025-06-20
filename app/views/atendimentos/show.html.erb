@@ -28,18 +28,19 @@
 <br>
 
 <% if @atendimento.audio.attached? %>
-  <audio controls>
-    <source src="<%= url_for(@atendimento.audio) %>" type="audio/mpeg">
-    Seu navegador não suporta o elemento de áudio.
-  </audio>
+  <p>
+    <strong>Áudio:</strong><br>
+    <audio controls>
+      <source src="<%= url_for(@atendimento.audio) %>" type="<%= @atendimento.audio.content_type %>">
+      Seu navegador não suporta o elemento de áudio.
+    </audio>
+  </p>
 <% end %>
 
-<br>
-
-<% if @atendimento.image.attached? %>
+<% if @atendimento.imagem.attached? %>
   <p>
-    <strong>Image:</strong><br>
-    <%= image_tag url_for(@atendimento.image), style: "max-width: 300px;" %>
+    <strong>Imagem:</strong><br>
+    <%= image_tag url_for(@atendimento.imagem), style: "max-width: 300px;" %>
   </p>
 <% end %>
 

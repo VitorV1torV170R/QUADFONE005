@@ -1,6 +1,7 @@
 class Profissional < ApplicationRecord
-    belongs_to :atendimento
-    belongs_to :paciente
+    
     belongs_to :empresa
+    has_many :atendimento
     has_many :clientes
+    has_many :paciente
 end

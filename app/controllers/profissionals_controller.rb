@@ -8,6 +8,8 @@ class ProfissionalsController < ApplicationController
 
   # GET /profissionals/1 or /profissionals/1.json
   def show
+    @profissional = Profissional.find(params[:id])
+    empresa = @profissional.empresa
   end
 
   # GET /profissionals/new

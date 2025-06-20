@@ -1,6 +1,6 @@
 class Empresa < ApplicationRecord
     has_many :profissionals
-    belongs_to :atendimento
-    belongs_to :paciente
+    has_many :atendimento
     has_many :clientes
+    has_many :paciente
 end
